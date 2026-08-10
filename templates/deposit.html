@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>Deposit Money</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <h1>Banking Management System</h1>
+
+      <a href="{% url 'logout' %}" class="logout"> Logout </a>
+    </div>
+
+    <div class="form-container">
+      <div class="form-card">
+        <h2>Deposit Money</h2>
+
+        <p class="form-description">Add money securely to your bank account.</p>
+
+        <form method="post">
+          {% csrf_token %} {{ form.as_p }}
+
+          <button type="submit" class="btn">Deposit Money</button>
+        </form>
+
+        <a href="{% url 'dashboard' %}" class="back-link">
+          ← Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>Create Bank Account</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <h1>Banking Management System</h1>
+
+      <a href="{% url 'dashboard' %}" class="logout"> Dashboard </a>
+    </div>
+
+    <div class="form-container">
+      <div class="form-card">
+        <h2>Create Bank Account</h2>
+
+        <p class="form-description">
+          Create your bank account and start managing your money.
+        </p>
+
+        <form method="post">
+          {% csrf_token %} {{ form.as_p }}
+
+          <button type="submit" class="btn">Create Account</button>
+        </form>
+
+        <a href="{% url 'dashboard' %}" class="back-link">
+          ← Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
