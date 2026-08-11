@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.messages import get_messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib.auth import authenticate, login, logout
@@ -14,7 +15,7 @@ def dashboard(request):
     try:
          account = BankAccount.objects.get(user=request.user)
     except BankAccount.DoesNotExist:
-        return render(request, 'dashboard.html',{"error": "no bank account found for this user."})
+        return render(request, 'dashboard.html',{ "account":None, "error": "no bank account found for this user."})
     return render(request, "dashboard.html", {
         "account": account
     })
@@ -272,7 +273,13 @@ def login_view(request):
             print("LOGIN FAILED: Invalid username or password.")  # Debugging line 
     return render(request, "login.html")
 def logout_view(request):
+    storage = get_messages(request)
+
+    for message in storage:
+        pass
+
     logout(request)
+    
     return redirect('home')
 
 @login_required
