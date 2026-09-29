@@ -1,0 +1,53 @@
+ {% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
+    <title>Customer Login</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <h1>Banking Management System</h1>
+
+      <a href="{% url 'register' %}" class="logout"> Register </a>
+    </div>
+
+    <div class="form-container">
+      <div class="form-card">
+        <h2>Customer Login</h2>
+
+        <p class="form-description">Login to access your bank account.</p>
+
+   
+
+        <form method="post">
+          {% csrf_token %}
+          <label for="username"> Username: </label>
+
+          <input type="text" id="username" name="username" required />
+
+          <label for="password"> Password: </label>
+
+          <input type="password" id="password" name="password" required />
+
+          <button type="submit" class="btn">Login</button>
+        </form>
+        <br />
+        <a href="{% url 'home' %}" class="back-link">←Back to Home</a>
+        <div class="login-links">
+          <a href="{% url 'forgot_password' %}"> Forgot Password? </a>
+
+          <p>
+            Don't have an account?
+            <a href="{% url 'register' %}"> Register here </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

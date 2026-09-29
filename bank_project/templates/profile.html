@@ -1,0 +1,90 @@
+  {% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+    <title>My Profile</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <h1>Banking Management System</h1>
+
+      <a href="{% url 'logout' %}" class="logout"> Logout </a>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-card">
+        <h2>My Profile</h2>
+
+        <p class="form-description">
+          View your personal and bank account details.
+        </p>
+        {% if account %}
+        <div class="profile-details">
+          <div class="profile-item">
+            <span>Username</span>
+            <strong>{{ account.user.username }}</strong>
+          </div>
+
+          <div class="profile-item">
+            <span>Account Number</span>
+            <strong>{{ account.account_number }}</strong>
+          </div>
+
+          <div class="profile-item">
+            <span>Account Type</span>
+            <strong>{{ account.account_type|title }}</strong>
+          </div>
+
+          <div class="profile-item">
+            <span>Phone</span>
+            <strong>{{ account.phone }}</strong>
+          </div>
+
+          <div class="profile-item">
+            <span>Email</span>
+            <strong>{{ account.user.email }}</strong>
+          </div>
+
+          <div class="profile-item">
+            <span>Address</span>
+            <strong>{{ account.address }}</strong>
+          </div>
+
+          <div class="profile-item balance-item">
+            <span>Available Balance</span>
+            <strong>₹{{ account.balance }}</strong>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <a href="{% url 'edit_profile' %}" class="btn"> Edit Profile </a>
+          {% else %}
+          <h3>No bank account found.</h3>
+          <p>
+            you have registered successfully but haven't created a bank account
+            yet.
+          </p>
+          <a href="{% url 'create_account' %}"
+            ><button>Create Bank Account</button></a
+          >
+          {% endif %}
+          <a href="{% url 'change_password' %}" class="btn">
+            Change Password
+          </a>
+          <a href="{% url 'dashboard' %}" class="back-link">
+            ← Back to Dashboard
+          </a>
+        </div>
+      </div>
+    </div>
+    <a href="{% url 'delete_account' %}"
+      ><button type="submit" class="del">Delete Account Permanently</button></a
+    >
+  </body>
+</html>
