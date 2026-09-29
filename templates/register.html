@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>Customer Registration</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <h1>Banking Management System</h1>
+
+      <a href="{% url 'login' %}" class="logout"> Login </a>
+    </div>
+
+    <div class="form-container">
+      <div class="form-card">
+        <h2>Customer Registration</h2>
+
+        <p class="form-description">Create your banking account.</p>
+
+        <form method="post">
+          {% csrf_token %} {{ form.as_p }}
+
+          <button type="submit" class="btn">Register</button>
+        </form>
+        <br />
+        <a href="{% url 'home' %}" class="back-link">←Back to Home</a>
+        <p class="form-footer">
+          Already have an account?
+          <a href="{% url 'login' %}"> Login here </a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

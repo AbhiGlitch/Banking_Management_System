@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <title>Banking Management System</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="navbar">
+      <h1>Banking Management System</h1>
+
+      <div class="nav-links">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login' %}">Login</a>
+      </div>
+    </div>
+
+    <div class="home-container">
+      <div class="home-card">
+        <h2>Welcome to Our Bank</h2>
+
+        <p>Manage your bank account securely and easily.</p>
+
+        <p class="home-description">
+          This Banking Management System is built using Django.
+        </p>
+
+        <div class="home-buttons">
+          <a href="{% url 'register' %}" class="btn"> Create Account </a>
+
+          <a href="{% url 'login' %}" class="btn"> Customer Login </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

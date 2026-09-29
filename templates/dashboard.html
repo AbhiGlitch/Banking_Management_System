@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+
+    <title>Banking Dashboard</title>
+
+    <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}" />
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <h1>Banking Management System</h1>
+
+      <a href="{% url 'logout' %}" class="logout"> Logout </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Welcome -->
+      <div class="welcome">
+        <h2>Customer Dashboard</h2>
+
+        <p>Welcome, <strong>{{ request.user.username }}</strong>!</p>
+      </div>
+
+      <!-- NO BANK ACCOUNT -->
+      {% if not account %}
+
+      <div class="action">
+        <h3>No Bank Account</h3>
+
+        <p>You haven't created a bank account yet.</p>
+
+        <a href="{% url 'create_account' %}" class="btn">
+          Create Bank Account
+        </a>
+      </div>
+
+      {% endif %}
+
+      <!-- BANK ACCOUNT EXISTS -->
+      {% if account %}
+
+      <!-- Account Information -->
+      <div class="account-card">
+        <h3>Account Information</h3>
+
+        <div class="account-details">
+          <div class="detail">
+            <span>Username</span>
+            <strong> {{ request.user.username }} </strong>
+          </div><br>
+
+          <div class="detail">
+            <span>Account Number</span>
+            <strong> {{ account.account_number }} </strong>
+          </div><br>
+
+          <div class="detail">
+            <span>Account Type</span>
+            <strong> {{ account.account_type|title }} </strong>
+          </div><br>
+
+          <div class="detail">
+            <span>Available Balance</span>
+            <strong class="balance"> ₹{{ account.balance }} </strong>
+          </div><br>
+        </div>
+      </div>
+
+      <!-- Banking Actions -->
+      <div class="actions">
+        <!-- Deposit -->
+        <div class="action">
+          <h3>Deposit</h3>
+
+          <p>Add money to your account.</p>
+
+          <a href="{% url 'deposit' %}" class="btn"> Deposit Money </a>
+        </div>
+
+        <!-- Withdraw -->
+        <div class="action">
+          <h3>Withdraw</h3>
+
+          <p>Withdraw money from your account.</p>
+
+          <a href="{% url 'withdraw' %}" class="btn"> Withdraw Money </a>
+        </div>
+
+        <!-- Transfer -->
+        <div class="action">
+          <h3>Transfer</h3>
+
+          <p>Transfer money to another account.</p>
+
+          <a href="{% url 'transfer' %}" class="btn"> Transfer Money </a>
+        </div>
+
+        <!-- Transactions -->
+        <div class="action">
+          <h3>Transactions</h3>
+
+          <p>View your transaction history.</p>
+
+          <a href="{% url 'transactions' %}" class="btn">
+            Transaction History
+          </a>
+        </div>
+      </div>
+
+      {% endif %}
+
+      <!-- Profile and Password -->
+      <div class="actions">
+        <!-- Profile -->
+        <div class="action">
+          <h3>Profile</h3>
+
+          <p>View and update your profile.</p>
+
+          <a href="{% url 'profile' %}" class="btn"> My Profile </a>
+        </div>
+
+        <!-- Change Password -->
+        <div class="action">
+          <h3>Password</h3>
+
+          <p>Change your account password.</p>
+
+          <a href="{% url 'change_password' %}" class="btn">
+            Change Password
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
